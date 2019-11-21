@@ -224,6 +224,10 @@ define(['jquery', 'underscore', 'twigjs'], function ($, _, twigjs) {
 
         return JSON.stringify([salesbot_source]);
       },
+
+      onAddAsSource: function (pipeline_id) {
+        console.log(pipeline_id);
+      }
     };
 
     return this;

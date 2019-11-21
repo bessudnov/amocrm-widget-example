@@ -24,7 +24,8 @@
     "settings",
     "digital_pipeline",
     "advanced_settings",
-    "salesbot_designer"
+    "salesbot_designer",
+    "lead_sources"
   ],
   "tour": {
     "is_tour": true,
@@ -43,14 +44,19 @@
       "type": "text",
       "required": true
     },
-    "api_key": {
-      "name": "settings.api_key",
-      "type": "text",
+    "password": {
+      "name": "settings.password",
+      "type": "pass",
       "required": true
     },
-    "account": {
-      "name": "settings.account",
-      "type": "text",
+    "users": {
+      "name": "settings.users",
+      "type": "users",
+      "required": true
+    },
+    "users_lp": {
+      "name": "settings.users_lp",
+      "type": "users_lp",
       "required": true
     },
     "oferta": {

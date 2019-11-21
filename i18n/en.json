@@ -7,8 +7,9 @@
     },
     "settings":{
         "login":"User login",
-        "api_key":"API key",
-        "account":"Account",
+        "password":"Password",
+        "users":"Users",
+        "users_lp":"Users (Login, Password)",
         "oferta":"I am agree to send account data to LTD \"Horns and hooves\"",
         "oferta_error":"To continue you need to agree"
     },
