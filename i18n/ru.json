@@ -24,7 +24,9 @@
         "text":"Текст",
         "number":"Число",
         "url":"URL",
-        "handler_name":"Название обработчика"
+        "handler_name":"Название обработчика",
+        "success_callback_title": "Успешно",
+        "fail_callback_title": "Не успешно"
     },
     "dp":{
         "message": "Сообщение"

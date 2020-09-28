@@ -24,7 +24,9 @@
         "text":"Text",
         "number":"Number",
         "url":"URL",
-        "handler_name":"Handler name"
+        "handler_name":"Handler name",
+        "success_callback_title": "Success",
+        "fail_callback_title": "Fail"
     },
     "dp":{
         "message": "Message"

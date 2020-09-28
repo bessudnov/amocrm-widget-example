@@ -203,6 +203,10 @@ define(['jquery', 'underscore', 'twigjs'], function ($, _, twigjs) {
               question: [],
               require: []
             },
+            salesbot_second_step = {
+              question: [],
+              require: []
+            },
             button_caption = params.button_caption || '',
             button_title = params.button_title || '',
             text = params.text || '',
@@ -222,7 +226,78 @@ define(['jquery', 'underscore', 'twigjs'], function ($, _, twigjs) {
 
         salesbot_source.question.push(handler_template);
 
-        return JSON.stringify([salesbot_source]);
+        var request_data = {};
+        if (AMOCRM.getBaseEntity() === 'customers') {
+          request_data.customer = '{{customer.id}}';
+        } else {
+          request_data.lead = '{{lead.id}}';
+        }
+
+
+        salesbot_source.question.push({
+          handler: 'widget_request',
+          params: {
+            url: 'https://example.com/salesbot',
+            data: request_data
+          }
+        });
+
+        salesbot_source.question.push({
+          handler: 'goto',
+          params: {
+            type: 'question',
+            step: 1
+          }
+        });
+
+        salesbot_second_step.question.push({
+          handler: 'conditions',
+          params: {
+            logic: 'and',
+            conditions: [
+              {
+                term1: '{{json.status}}',
+                term2: 'success',
+                operation: '='
+              }
+            ],
+            result: [
+              {
+                handler: 'exits',
+                params: {
+                  value: 'success'
+                }
+              }
+            ]
+          }
+        });
+
+        salesbot_second_step.question.push({
+          handler: 'exits',
+          params: {
+            value: 'fail'
+          }
+        });
+
+        return JSON.stringify([salesbot_source, salesbot_second_step]);
+      },
+
+      /**
+       * Метод, который позволяет отрисовать кастомные настройки виджета в Salesbot
+       *
+       * В ответе можно вернуть выходы, которые будут у блока
+       *
+       * @param $body
+       * @param rowTemplate
+       * @param params
+       */
+      salesbotDesignerSettings: function ($body, rowTemplate, params) {
+        return {
+          exits: [
+            { code: 'success', title: self.i18n('salesbot').success_callback_title },
+            { code: 'fail', title: self.i18n('salesbot').fail_callback_title }
+          ]
+        };
       },
 
       onAddAsSource: function (pipeline_id) {
